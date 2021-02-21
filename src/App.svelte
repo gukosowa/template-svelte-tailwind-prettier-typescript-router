@@ -1,36 +1,26 @@
+<div class="App h-screen flex flex-col">
+  <Header />
+  <div class="mt-16 bg-gray-200 flex-grow p-2">
+    <Router {routes} restoreScrollState={true} on:routeLoaded={routeLoaded} />
+  </div>
+</div>
+
 <script>
-	import './TailwindStyles.svelte';
-	
-	const message = 'Learn Svelte';
+  import Header from '~components/Header.svelte'
+  import Router from 'svelte-spa-router'
+  import '~css/main.css'
+
+  import Main from '~src/pages/Main.svelte'
+  import { route } from '~src/store'
+
+  const routes = {
+    '/': Main,
+  }
+
+  function routeLoaded(event) {
+    route.set(event.detail)
+  }
 </script>
 
 <style>
-	.App-logo {
-		animation: App-logo-scale infinite 1.6s ease-in-out alternate;
-	}
-	@keyframes App-logo-scale {
-		from {
-			transform: scale(1);
-		}
-		to {
-			transform: scale(1.06);
-		}
-	}
 </style>
-
-<div class="text-center font-serif">
-	<header class="bg-gray-100 h-screen flex justify-center items-center flex-col text-3xl">
-		<img src="/logo.svg" class="App-logo pointer-events-none m-4 h-64" alt="logo" />
-		<p>
-			Edit <code>src/App.svelte</code> and save to reload.
-		</p>
-		<a
-			class="text-orange-500"
-			href="https://svelte.dev"
-			target="_blank"
-			rel="noopener noreferrer"
-		>
-			{message}
-		</a>
-	</header>
-</div>
